@@ -95,21 +95,21 @@ services:
 
   
   #SGBD
-  adminer:
-    container_name: datasource-adminer
-    image: adminer:latest
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: "0.2"
-    #       memory: "256M"
-    restart: always
-    ports:
-      - 8888:8080
-    profiles:
-      - datasource
-    networks:
-      - datastack
+  # adminer:
+  #   container_name: datasource-adminer
+  #   image: adminer:latest
+  #   # deploy:
+  #   #   resources:
+  #   #     limits:
+  #   #       cpus: "0.2"
+  #   #       memory: "256M"
+  #   restart: always
+  #   ports:
+  #     - 8888:8080
+  #   profiles:
+  #     - datasource
+  #   networks:
+  #     - datastack
   
 
   #DATA WAREHOUSE
@@ -836,6 +836,21 @@ services:
       - datastorage
     networks:
       - datastack
+  superset:
+      build:
+        context: ./superset
+        dockerfile: dockerfile
+      container_name: superset
+      environment:
+        - ADMIN_USERNAME=admin
+        - ADMIN_EMAIL=admin@superset.com
+        - ADMIN_PASSWORD=admin
+      ports:
+        - '8088:8088'
+      networks:
+        - datastack
+      profiles:
+        - viz
 
 networks:
   datastack:
