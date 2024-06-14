@@ -2,3 +2,4 @@ logs/
 mysql-data/
 plugins/
 postgres-data/
+pgadmin_data/

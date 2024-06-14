@@ -134,6 +134,24 @@ services:
       - warehouse
     networks:
       - datastack
+
+  pgadmin:
+    container_name: pgadmin_service
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:5050"
+    depends_on:
+      - warehouse
+    networks:
+        - datastack
+    profiles:
+        - warehouse
     
   docker-proxy:
       image: alpine/socat
