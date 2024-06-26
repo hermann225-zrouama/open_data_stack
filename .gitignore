@@ -3,3 +3,4 @@ mysql-data/
 plugins/
 postgres-data/
 pgadmin_data/
+data/
